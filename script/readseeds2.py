@@ -862,7 +862,7 @@ if __name__ == "__main__":
 	seeds=readSeeds2()
 	# else:
 		# seeds=readSeeds1()
-	if not wd.startswith('/mnt/'): wd='/mnt'+wd
+	#if not wd.startswith('/mnt/'): wd='/mnt'+wd
 	base = os.path.basename(wd)
 	print 'path',wd
 	print 'thread', thread
@@ -995,3 +995,4 @@ if __name__ == "__main__":
 	# if pair: sf.write('source prepPriceFile.sh \n')
 	sf.write('source movetowww.sh \n')
 	sf.close()
+	print 'the end'
