@@ -80,7 +80,7 @@ acc2tid={}
 
 def loadTax():
 	global nodes, names, accs, name2tid
-	f=open('nodes.dmp', 'r')
+	f=open('../database/taxonomy/update/nodes.dmp', 'r')
 	
 	for line in f: #create nodes
 		parts = line.strip().split('|')
@@ -88,7 +88,7 @@ def loadTax():
 		nodes[tid]= Node(tid, level)
 	f.close()
 
-	f=open('nodes.dmp', 'r')
+	f=open('../database/taxonomy/update/nodes.dmp', 'r')
 	for line in f:
 		parts = line.strip().split('|')
 		tid, pid, level = parts[0].strip(),parts[1].strip(),parts[2].strip()
@@ -98,7 +98,7 @@ def loadTax():
 			n1.add_parent(n2)
 	f.close()
 
-	f=open('names.dmp', 'r')
+	f=open('../database/taxonomy/update/names.dmp', 'r')
 	for line in f:
 		if 'scientific name' in line:
 			parts=line.strip().split('|')
@@ -107,18 +107,18 @@ def loadTax():
 			name2tid[name]=tid
 			names[tid]=name.replace(':', '_').replace('$', '_')
 	f.close()
-	of=open('tax_tree.txt', 'w')
+	of=open('../tax_tree.txt', 'w')
 	nodes['1'].printTree(0, of)
 	of.close()
 	
-	f=gzip.open('prot.accession2taxid.gz', 'rb')
+	f=gzip.open('../database/taxonomy/refseq/prot.accession2taxid.filtered.gz', 'rb')
 	f.readline() #header
 	for line in f:
 		parts = line.strip().split()
 		acc2tid[parts[1]] = parts[2]
 	f.close()
 	
-	f=gzip.open('nucl_gb.accession2taxid.gz', 'rb')
+	f=gzip.open('../database/taxonomy/refseq/nucl_gb.accession2taxid.filtered.gz', 'rb')
 	f.readline() #header
 	for line in f:
 		parts = line.strip().split()
@@ -438,7 +438,7 @@ print 'adding taxons virus'
 # addTaxon('nr.gz', True)
 # addLinlinHerv()
 
-addTaxonDNA('viral.genomic.fa.gz', False)
+addTaxonDNA('../database/taxonomy/viral/viral.genomic.fa.gz', False)
 
 # os.system('segmasker  -locut 0.9 -hicut 2.5  -in virus.fa -infmt fasta -parse_seqids -outfmt maskinfo_asn1_bin -out virus_mask.asnb')
 # os.system('makeblastdb -in virus.fa -dbtype prot -parse_seqids -mask_data virus_mask.asnb -out virus_mask')
