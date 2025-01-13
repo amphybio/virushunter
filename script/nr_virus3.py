@@ -107,7 +107,7 @@ def loadTax():
 			name2tid[name]=tid
 			names[tid]=name.replace(':', '_').replace('$', '_')
 	f.close()
-	of=open('../tax_tree.txt', 'w')
+	of=open('tax_tree.txt', 'w')
 	nodes['1'].printTree(0, of)
 	of.close()
 	
